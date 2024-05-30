@@ -42,6 +42,9 @@ public class GameManager : Singleton<GameManager>
         base.OnInitialize();
         LoadComponentReferences();
 
+        // 현재 씬 이름 검사 추가
+        CheckCurrentScene();
+
         Inventory inven = new Inventory(this);
 
         if (InventoryUI != null)
@@ -69,7 +72,6 @@ public class GameManager : Singleton<GameManager>
         shopInventory = new ShopInventory();
     }
 
-
     // 초기화 이전에 필요한 컴포넌트를 미리 설정
     protected override void OnPreInitialize()
     {
@@ -91,6 +93,29 @@ public class GameManager : Singleton<GameManager>
         if (equipUI == null)
         {
             Debug.LogError("Equip_UI를 찾을 수 없습니다.");
+        }
+    }
+
+    // 현재 씬 이름을 검사하는 메서드 추가
+    private void CheckCurrentScene()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        Debug.Log("현재 씬 이름: " + currentSceneName);
+
+        if (currentSceneName == "MainMenuScene")
+        {
+            Debug.Log("메인 메뉴 씬에서 초기화 중...");
+            // 메인 메뉴 씬에서 필요한 초기화 작업 추가
+        }
+        else if (currentSceneName == "InGameScene")
+        {
+            Debug.Log("인게임 씬에서 초기화 중...");
+            // 인게임 씬에서 필요한 초기화 작업 추가
+        }
+        else
+        {
+            Debug.Log("알 수 없는 씬에서 초기화 중..." + currentSceneName);
+            // 기타 씬에서 필요한 초기화 작업 추가
         }
     }
 
@@ -166,17 +191,17 @@ public class GameManager : Singleton<GameManager>
 
     public void SaveEquip()
     {
-        if(equipUI != null)
+        if (equipUI != null)
             equipUI.Equip.SaveEquipToJson();
     }
     public void LoadEquip()
     {
-        if(equipUI != null)
+        if (equipUI != null)
             equipUI.Equip.LoadEquipFromJson();
     }
 #if UNITY_EDITOR
 
-    public void Test_GameLoad() 
+    public void Test_GameLoad()
     {
         OnGameStartCompleted?.Invoke();
     }

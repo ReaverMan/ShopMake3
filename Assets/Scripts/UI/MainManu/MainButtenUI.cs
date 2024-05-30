@@ -3,13 +3,23 @@ using UnityEngine.UI;
 
 public class MainButtonUI : MonoBehaviour
 {
+    /// <summary>
+    /// 게임시작 버튼이지만 장비창으로 감
+    /// </summary>
     public Button equipmentButton;
+    /// <summary>
+    /// 상점가는 버튼
+    /// </summary>
     public Button shopButton;
+    /// <summary>
+    /// 인벤,원드인벤이 있는 창고로 가는 버튼
+    /// </summary>
     public Button inventoryButton;
+    /// <summary>
+    /// 게임 종료 버튼 
+    /// </summary>
     public Button gameEndButton;
 
-    public Button goInvenButton;
-    public Button readyButton;
     public Button mainManuButton;
     public Button gamestartButton;
 
@@ -29,8 +39,6 @@ public class MainButtonUI : MonoBehaviour
         inventoryButton.onClick.AddListener(() => ToggleUI(ToggleInventory));
         shopButton.onClick.AddListener(() => ToggleUI(ToggleShop));
         gameEndButton.onClick.AddListener(() => EndGame());
-        goInvenButton.onClick.AddListener(() => ToggleUI(ToggleInventory));
-        readyButton.onClick.AddListener(() => ToggleUI(Equipment));
         mainManuButton.onClick.AddListener(() => ShowMainButtons());
         gamestartButton.onClick.AddListener(() => Gamestart());
 

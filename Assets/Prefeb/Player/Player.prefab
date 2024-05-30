@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1307303709941618119}
-  - component: {fileID: 7283723726517198875}
+  - component: {fileID: 6232139712740522819}
   m_Layer: 6
   m_Name: Throw
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6810731241642701826}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7283723726517198875
+--- !u!114 &6232139712740522819
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 16656547182662846}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b73aa32433ec4a4f9d89db0f976fe2d, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c8ddf015a564bb49b835424059c77ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   equipment: 1
@@ -85,7 +85,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 294655496415021546}
-  - component: {fileID: 932416241644307173}
+  - component: {fileID: 7048953196287327855}
   m_Layer: 6
   m_Name: Helmet
   m_TagString: Untagged
@@ -108,7 +108,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6810731241642701826}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &932416241644307173
+--- !u!114 &7048953196287327855
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2003741095970028831}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b73aa32433ec4a4f9d89db0f976fe2d, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c8ddf015a564bb49b835424059c77ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   equipment: 4
@@ -130,7 +130,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6810731241642701826}
-  - component: {fileID: 5609486960660032223}
+  - component: {fileID: 1572184769180904474}
   m_Layer: 6
   m_Name: WeaponTransform
   m_TagString: Untagged
@@ -159,7 +159,7 @@ Transform:
   - {fileID: 153230667144444026}
   m_Father: {fileID: 1170557410350977315}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5609486960660032223
+--- !u!114 &1572184769180904474
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2089092278167706946}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a96e84d344faf0e4e9a6e02fb4fef192, type: 3}
+  m_Script: {fileID: 11500000, guid: e2055fdabd6787e4b9f87d06fae54309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3841771375528846892
@@ -180,7 +180,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2561861343511602913}
-  - component: {fileID: 4577228059869334833}
+  - component: {fileID: 7502767754068648160}
   m_Layer: 6
   m_Name: Armor
   m_TagString: Untagged
@@ -203,7 +203,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6810731241642701826}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4577228059869334833
+--- !u!114 &7502767754068648160
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3841771375528846892}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b73aa32433ec4a4f9d89db0f976fe2d, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c8ddf015a564bb49b835424059c77ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   equipment: 3
@@ -225,7 +225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5202300062801387005}
-  - component: {fileID: 2803635431236428960}
+  - component: {fileID: 6838770493855154227}
   m_Layer: 6
   m_Name: BackPack
   m_TagString: Untagged
@@ -248,7 +248,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6810731241642701826}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2803635431236428960
+--- !u!114 &6838770493855154227
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -257,7 +257,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4647606968994060495}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b73aa32433ec4a4f9d89db0f976fe2d, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c8ddf015a564bb49b835424059c77ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   equipment: 5
@@ -270,7 +270,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 153230667144444026}
-  - component: {fileID: 1137145391191063121}
+  - component: {fileID: 6700180903887270199}
   m_Layer: 6
   m_Name: ETC
   m_TagString: Untagged
@@ -293,7 +293,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6810731241642701826}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1137145391191063121
+--- !u!114 &6700180903887270199
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -302,7 +302,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6638618807306197485}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b73aa32433ec4a4f9d89db0f976fe2d, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c8ddf015a564bb49b835424059c77ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   equipment: 2
@@ -315,7 +315,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8442667518386780232}
-  - component: {fileID: 387459789054538973}
+  - component: {fileID: 6947787782814883872}
   m_Layer: 6
   m_Name: Weapon
   m_TagString: Untagged
@@ -338,7 +338,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6810731241642701826}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &387459789054538973
+--- !u!114 &6947787782814883872
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -347,7 +347,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7220081283623107980}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b73aa32433ec4a4f9d89db0f976fe2d, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c8ddf015a564bb49b835424059c77ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   equipment: 0
