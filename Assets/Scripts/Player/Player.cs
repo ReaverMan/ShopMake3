@@ -1,9 +1,14 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+
+
 
 public class Player : MonoBehaviour
 {
@@ -362,7 +367,66 @@ public class Player : MonoBehaviour
         }
         return result;
     }
+    public void SavePlayerStateToJson()
+    {
+        PlayerObj playerobj = new PlayerObj
+        {
+            ChildObjects = SaveChildObjects() // 자식 오브젝트 상태 저장
+        };
 
+        string json = JsonConvert.SerializeObject(playerobj, Newtonsoft.Json.Formatting.Indented);
+        File.WriteAllText(Path.Combine(Application.persistentDataPath, "player.json"), json);
+        Debug.Log("플레이어 상태를 저장했습니다.");
+    }
+
+    public void LoadPlayerStateFromJson()
+    {
+        string path = Path.Combine(Application.persistentDataPath, "player.json");
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            PlayerObj playerobj = JsonConvert.DeserializeObject<PlayerObj>(json);
+
+            LoadChildObjects(playerobj.ChildObjects); // 자식 오브젝트 상태 불러오기
+
+            Debug.Log("플레이어 상태를 불러왔습니다.");
+        }
+        else
+        {
+            Debug.LogWarning("저장된 플레이어 상태 데이터가 없습니다.");
+        }
+    }
+
+    private List<ChildObjectState> SaveChildObjects()
+    {
+        List<ChildObjectState> childObjects = new List<ChildObjectState>();
+        foreach (Transform child in transform)
+        {
+            ChildObjectState state = new ChildObjectState
+            {
+                Name = child.name,
+                Position = child.localPosition,
+                Rotation = child.localRotation,
+                Scale = child.localScale,
+                IsActive = child.gameObject.activeSelf
+            };
+            childObjects.Add(state);
+        }
+        return childObjects;
+    }
+
+    private void LoadChildObjects(List<ChildObjectState> childObjects)
+    {
+        foreach (var state in childObjects)
+        {
+            GameObject child = new GameObject(state.Name);
+            child.transform.parent = this.transform;
+            child.transform.localPosition = state.Position;
+            child.transform.localRotation = state.Rotation;
+            child.transform.localScale = state.Scale;
+            child.SetActive(state.IsActive);
+        }
+    }
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
@@ -375,4 +439,20 @@ public class Player : MonoBehaviour
         }
     }
 #endif
+}
+
+[System.Serializable]
+public class PlayerObj
+{
+    public List<ChildObjectState> ChildObjects; // 자식 오브젝트 상태 저장
+}
+
+[System.Serializable]
+public class ChildObjectState
+{
+    public string Name;
+    public Vector3 Position;
+    public Quaternion Rotation;
+    public Vector3 Scale;
+    public bool IsActive;
 }

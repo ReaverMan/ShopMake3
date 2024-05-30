@@ -482,6 +482,7 @@ public class Inventory
         return null; // 비어 있는 슬롯이 없으면 null 반환
     }
 
+
 #if UNITY_EDITOR
     public void Test_InventoryPrint()
     {

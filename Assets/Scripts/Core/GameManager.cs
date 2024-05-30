@@ -123,6 +123,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (sceneName == "InGameScene")
         {
+            player.SavePlayerStateToJson();
             SaveWorldInventory();
             SaveInventory();
             SaveEquip();
@@ -134,6 +135,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (sceneName == "MainMenuScene")
         {
+            player.SavePlayerStateToJson();
             SaveInventory();
             SaveEquip();
         }
@@ -152,12 +154,14 @@ public class GameManager : Singleton<GameManager>
 
         if (sceneName == "MainMenuScene")
         {
+            player.LoadPlayerStateFromJson();
             LoadWorldInventory();
             LoadInventory();
             LoadEquip();
         }
         else if (sceneName == "InGameScene")
         {
+            player.LoadPlayerStateFromJson();
             LoadInventory();
             LoadEquip();
         }
