@@ -93,7 +93,7 @@ public class WorldInventory
                 else
                 {
                     // 다른 종류의 아이템
-                    
+
                 }
             }
         }
@@ -141,7 +141,6 @@ public class WorldInventory
                 {
                     // 필요한 총알 수 보다 슬롯에 있는 총알이 적다.
                     result += (int)slot.ItemCount;
-                    MinusMoney(slot, result);
                     count -= slot.ItemCount;
                     slot.DecreaseSlotItem(slot.ItemCount);
                 }
@@ -149,7 +148,6 @@ public class WorldInventory
                 {
                     // 필요한 총알 수 보다 슬롯에 있는 총알이 많거나 같다.
                     result += (int)count;
-                    MinusMoney(slot, (int)count);
                     slot.DecreaseSlotItem(count);
                     break;
                 }
@@ -342,7 +340,7 @@ public class WorldInventory
         return false; // 루프를 끝까지 돌았는데도 아이템을 찾지 못했으면 false 반환
     }
 
-        /// <summary>
+    /// <summary>
     /// 임시로 쓰는 함수, 나중에 돈 개수로 바꾸기 위해 이곳에 배치
     /// </summary>
     /// <param name="slot"></param>

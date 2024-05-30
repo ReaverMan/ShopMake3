@@ -3,23 +3,10 @@ using UnityEngine.UI;
 
 public class MainButtonUI : MonoBehaviour
 {
-    /// <summary>
-    /// 게임시작 버튼이지만 장비창으로 감
-    /// </summary>
     public Button equipmentButton;
-    /// <summary>
-    /// 상점가는 버튼
-    /// </summary>
     public Button shopButton;
-    /// <summary>
-    /// 인벤,원드인벤이 있는 창고로 가는 버튼
-    /// </summary>
     public Button inventoryButton;
-    /// <summary>
-    /// 게임 종료 버튼 
-    /// </summary>
     public Button gameEndButton;
-
     public Button mainManuButton;
     public Button gamestartButton;
 
@@ -30,7 +17,6 @@ public class MainButtonUI : MonoBehaviour
 
     public GameObject mainButtonPanel;
     public GameObject invenButtonPanel;
-
 
     void Start()
     {
@@ -48,6 +34,7 @@ public class MainButtonUI : MonoBehaviour
             SetAllUIElementsActive(false);
             mainButtonPanel.SetActive(true);
             invenButtonPanel.SetActive(false);
+            gamestartButton.gameObject.SetActive(false); // 초기에는 비활성화
         }
         else
         {
@@ -111,6 +98,7 @@ public class MainButtonUI : MonoBehaviour
         inventory.Open();
         shopInventory.Close();
         worldInventory.Close();
+        gamestartButton.gameObject.SetActive(true); // Equipment 메서드가 호출될 때 활성화
     }
 
     void ToggleInventory()
@@ -119,6 +107,7 @@ public class MainButtonUI : MonoBehaviour
         inventory.Open();
         shopInventory.Close();
         worldInventory.Open();
+        gamestartButton.gameObject.SetActive(false); // 다른 UI를 열 때 비활성화
     }
 
     void ToggleShop()
@@ -127,6 +116,7 @@ public class MainButtonUI : MonoBehaviour
         inventory.Close();
         shopInventory.Open();
         worldInventory.Open();
+        gamestartButton.gameObject.SetActive(false); // 다른 UI를 열 때 비활성화
     }
 
     void EndGame()
@@ -146,6 +136,7 @@ public class MainButtonUI : MonoBehaviour
         SetAllUIElementsActive(false);
         mainButtonPanel.SetActive(true);
         invenButtonPanel.SetActive(false);
+        gamestartButton.gameObject.SetActive(false); // 메인 버튼을 보여줄 때 비활성화
     }
 
     void SetAllUIElementsActive(bool state)
