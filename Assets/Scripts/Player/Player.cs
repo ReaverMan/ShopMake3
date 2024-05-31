@@ -374,9 +374,16 @@ public class Player : MonoBehaviour
             ChildObjects = SaveChildObjects() // 자식 오브젝트 상태 저장
         };
 
+        var settings = new JsonSerializerSettings
+        {
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            Formatting = Newtonsoft.Json.Formatting.Indented
+        };
+
         string json = JsonConvert.SerializeObject(playerobj, Newtonsoft.Json.Formatting.Indented);
         File.WriteAllText(Path.Combine(Application.persistentDataPath, "player.json"), json);
         Debug.Log("플레이어 상태를 저장했습니다.");
+
     }
 
     public void LoadPlayerStateFromJson()
