@@ -98,7 +98,7 @@ public class Inventory_UI : MonoBehaviour
         dropSlot.onDropOk += OnDropOk;
         dropSlot.Close();
 
-        if(Owner != null)
+        if (Owner != null)
         {
             Owner.onWeightChange += weightPanel.Refresh;
             weightPanel.Refresh(Owner.Weight);
@@ -119,8 +119,8 @@ public class Inventory_UI : MonoBehaviour
 
     public void PlusValue(ItemSlot slot)
     {
-        if(Owner != null)
-        Owner.Weight += slot.ItemData.weight;
+        if (Owner != null)
+            Owner.Weight += slot.ItemData.weight;
     }
 
     /// <summary>
@@ -200,7 +200,7 @@ public class Inventory_UI : MonoBehaviour
     /// <param name="index"></param>
     private void OnClick(ItemSlot slot, RectTransform rect)
     {
-        if(!invenManager.DragSlot.ItemSlot.IsEmpty)
+        if (!invenManager.DragSlot.ItemSlot.IsEmpty)
         {
             OnItemMoveEnd(slot, rect);
         }
@@ -241,18 +241,54 @@ public class Inventory_UI : MonoBehaviour
     {
         if (!slot.IsEquiped)
         {
-            if (equip.EquipItem(slot) && Owner.SlotNumber.AddItem(slot.ItemData.itemPrefab, slotsUI[slot.Index].Equipment))
+
+            if (!(slot.ItemData.itemType == ItemType.Buff || slot.ItemData.itemType == ItemType.Grenade))
             {
-                slot.IsEquiped = true;
+                if (equip.EquipItem(slot))
+                {
+                    Owner.SlotNumber.AddItem(slot.ItemData.itemPrefab, slotsUI[slot.Index].Equipment);
+                    slot.IsEquiped = true;
+                }
+                else
+                {
+                    Debug.Log("장비 아이템 장착 실패");
+                }
             }
             else
             {
-                Debug.Log("아이템 장착 실패");
+                if (equip.EquipItem(slot))
+                {
+                    Owner.SlotNumber.AddItem(slot.ItemData.itemPrefab, slotsUI[slot.Index].Equipment);
+                }
+                else if (equip.UnEquipItem(slot))
+                {
+                    Owner.UnEquipped(slot.ItemData.itemType);
+                    equip.EquipItem(slot);
+                    Owner.SlotNumber.AddItem(slot.ItemData.itemPrefab, slotsUI[slot.Index].Equipment);
+                }
+                else
+                {
+                    Debug.Log("사용 아이템 장착 실패");
+                }
             }
         }
         selectMenu.Close();
     }
-
+    public void ClearEquip()
+    {
+        Debug.Log("인벤장비해제");
+        if (equip != null)
+        {
+            equip.AllUnEquip();
+            for (int i = 0; i < slotsUI.Length; i++)
+            {
+                if (slotsUI[i].ItemSlot.IsEquiped)
+                {
+                    slotsUI[i].ItemSlot.IsEquiped = false;
+                }
+            }
+        }
+    }
     public void OnItemUnEquip(ItemSlot slot)
     {
         if (slot.IsEquiped)

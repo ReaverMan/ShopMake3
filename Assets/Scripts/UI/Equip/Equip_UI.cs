@@ -1,17 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class Equip_UI : MonoBehaviour
 {
     Equip equip;
 
     public Equip Equip => equip;
-
 
     EquipSlot_UI[] equipSlot_UI;
 
@@ -42,12 +35,22 @@ public class Equip_UI : MonoBehaviour
         canvas = GetComponent<CanvasGroup>();
 
         QuickSlot = GetComponent<QuickSlot>();
-    }
 
+        if (equipSlot_UI == null || equipSlot_UI.Length == 0)
+        {
+            Debug.LogError("equipSlot_UI가 초기화되지 않았습니다.");
+        }
+    }
 
     public void InitializeInventory(Equip playerEquip)
     {
         equip = playerEquip;
+
+        if (equipSlot_UI == null || equipSlot_UI.Length == 0)
+        {
+            Debug.LogError("equipSlot_UI가 초기화되지 않았습니다.");
+            return;
+        }
 
         for (uint i = 0; i < equipSlot_UI.Length; i++)
         {
@@ -72,9 +75,9 @@ public class Equip_UI : MonoBehaviour
         return equip.AddItem(slot.ItemData.itemId);
     }
 
-    public void UnEquipItem(ItemSlot slot)
+    public bool UnEquipItem(ItemSlot slot)
     {
-        equip.RemoveItem(slot.ItemData.itemId);
+        return equip.RemoveItem(slot.ItemData.itemId);
     }
 
     public void UseItem(uint index)
@@ -85,6 +88,32 @@ public class Equip_UI : MonoBehaviour
         {
             Owner.UnEquipped(equipSlot_UI[index].EquipSlot.ItemData.itemType);
             equip.RemoveItem(equipSlot_UI[index].EquipSlot.ItemData.itemId);
+        }
+    }
+
+    public void AllUnEquip()
+    {
+        Debug.Log("Equip_UI AllUnEquip 호출");
+        if (equipSlot_UI == null)
+        {
+            Debug.LogError("equipSlot_UI 배열이 초기화되지 않았습니다.");
+            return;
+        }
+
+        for (int i = 0; i < equipSlot_UI.Length; i++)
+        {
+            if (equipSlot_UI[i] != null && equipSlot_UI[i].ItemSlot != null && equipSlot_UI[i].ItemSlot.IsEquiped)
+            {
+                UnEquipItem(equipSlot_UI[i].EquipSlot);
+                if (Owner != null)
+                {
+                    Owner.UnEquipped(equipSlot_UI[i].EquipSlot.ItemData.itemType);
+                }
+                else
+                {
+                    Debug.LogError("Owner가 null입니다.");
+                }
+            }
         }
     }
 
@@ -101,16 +130,4 @@ public class Equip_UI : MonoBehaviour
         canvas.interactable = false;
         canvas.blocksRaycasts = false;
     }
-
-    //public void InventoryOnOff()
-    //{
-    //    if (canvas.interactable)
-    //    {
-    //        Close();
-    //    }
-    //    else
-    //    {
-    //        Open();
-    //    }
-    //}
 }

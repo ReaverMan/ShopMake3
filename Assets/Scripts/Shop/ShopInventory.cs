@@ -28,7 +28,7 @@ public class ShopInventory
         ItemDataManager itemDataManager = GameManager.Instance.ItemData;
         if (itemDataManager == null)
         {
-            Debug.LogError("itemDataManager가 null입니다.");
+            Debug.Log("itemDataManager가 null입니다.");
             return;
         }
 

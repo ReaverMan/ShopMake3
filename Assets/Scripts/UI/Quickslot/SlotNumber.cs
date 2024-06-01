@@ -131,7 +131,7 @@ public class SlotNumber : MonoBehaviour
 
         for (int i = 0; i < quickTypes.Length; i++)
         {
-            if (type == quickTypes[i].Equipment && quickTypes[i].IsEmpty)
+            if (type == quickTypes[i].Equipment && (quickTypes[i].IsEmpty || quickTypes[i].equipment == Equipment.ETC))
             {
                 Instantiate(obj, quickTypes[i].transform);
                 result = true;

@@ -1,16 +1,4 @@
-using Newtonsoft.Json;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
-
-[Serializable]
-public class EquipSlotData
-{
-    public ItemCode ItemCode;
-    public bool IsEquipped;
-}
 
 public class Equip
 {
@@ -96,16 +84,18 @@ public class Equip
         return (slot != null) || (slot == dragSlot);
     }
 
-    private void RemoveItem(uint slotIndex, uint count = 1)
+    private bool RemoveItem(uint slotIndex, uint count = 1)
     {
         if (IsValidIndex(slotIndex))
         {
             EquipSlot slot = slots[slotIndex];
             slot.DecreaseSlotItem(count);
+            return true; // 아이템 제거 성공
         }
+        return false; // 유효하지 않은 인덱스
     }
 
-    public void RemoveItem(ItemCode code, uint count = 1)
+    public bool RemoveItem(ItemCode code, uint count = 1)
     {
         for (int i = 0; i < SlotCount; i++)
         {
@@ -116,64 +106,21 @@ public class Equip
             {
                 if (!slot.IsEmpty)
                 {
-                    RemoveItem((uint)i, count);
-                    break;
+                    return RemoveItem((uint)i, count); // 내부 메서드 호출 결과 반환
                 }
             }
         }
+        return false; // 해당 코드에 해당하는 아이템을 찾지 못함
     }
 
-    public void ClearEquip()
+    public void UnEquipAllItems()
     {
-        foreach (var slot in slots)
-        {
-            slot.ClearSlot();
-        }
-    }
-
-    public void SaveEquipToJson()
-    {
-        List<EquipSlotData> slotDataList = new List<EquipSlotData>();
         foreach (var slot in slots)
         {
             if (!slot.IsEmpty)
             {
-                slotDataList.Add(new EquipSlotData()
-                {
-                    ItemCode = slot.ItemData.itemId,
-                    IsEquipped = slot.IsEquiped
-                });
+                RemoveItem(slot.ItemData.itemId);
             }
-        }
-
-        string json = JsonConvert.SerializeObject(slotDataList, Newtonsoft.Json.Formatting.Indented);
-        File.WriteAllText(Path.Combine(Application.persistentDataPath, "equip.json"), json);
-        Debug.Log("장비 데이터를 저장했습니다.");
-    }
-
-    public void LoadEquipFromJson()
-    {
-        string path = Path.Combine(Application.persistentDataPath, "equip.json");
-        if (File.Exists(path))
-        {
-            string json = File.ReadAllText(path);
-            List<EquipSlotData> slotDataList = JsonConvert.DeserializeObject<List<EquipSlotData>>(json);
-            ClearEquip();  // 기존 장비 클리어
-
-            foreach (var slotData in slotDataList)
-            {
-                ItemData itemData = itemDataManager.GetItemDataByCode(slotData.ItemCode);
-                EquipSlot slot = GetEmptySlot(slotData.ItemCode);  // 빈 슬롯 찾기 메서드 구현 필요
-                if (slot != null)
-                {
-                    slot.AssignSlotItem(itemData, 1, slotData.IsEquipped);  // 장비 슬롯에 아이템 할당
-                }
-            }
-            Debug.Log("장비 데이터를 불러왔습니다.");
-        }
-        else
-        {
-            Debug.LogWarning("장비 데이터 파일을 찾을 수 없습니다.");
         }
     }
 

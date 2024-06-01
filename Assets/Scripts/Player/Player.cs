@@ -10,8 +10,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-
-
 public class Player : MonoBehaviour
 {
     public float moveSpeed = 3f;
@@ -118,11 +116,14 @@ public class Player : MonoBehaviour
         inputActions.Player.Disable();
     }
 
+    public List<EquipmentData> currentEquipments = new List<EquipmentData>();
+    private SaveLoadManager saveLoadManager;
+
     private void Start()
     {
         cc = GetComponent<CharacterController>();
         playerUI = GameManager.Instance.PlayerUI;
-
+        saveLoadManager = FindObjectOfType<SaveLoadManager>();
         // 씬 이름이 MainMenuScene이면 입력 시스템 비활성화
         if (SceneManager.GetActiveScene().name == "MainMenuScene")
         {
@@ -294,6 +295,7 @@ public class Player : MonoBehaviour
         {
             slotNum.SwapItem(type, firePosition, true);
         }
+
     }
 
     public void UseItem()
@@ -370,75 +372,27 @@ public class Player : MonoBehaviour
         return result;
     }
 
-    private Dictionary<string, WeaponState> weaponStates = new Dictionary<string, WeaponState>();
-    private List<string> weaponTypes = new List<string> { "Weapon", "Armor", "Helmet", "Throw", "BackPack", "ETC" };
-
-    // 무기 상태 저장 메서드
-    public void SaveWeaponState()
+    public void UnequipAllItems()
     {
-        foreach (var weaponType in weaponTypes)
+        Inventory_UI inventoryUI = GameManager.Instance.InventoryUI;
+
+        if (inventoryUI != null)
         {
-            Transform weaponTransform = GetWeaponTransform(weaponType);
-            if (weaponTransform != null && weaponTransform.childCount > 0)
-            {
-                Transform weapon = weaponTransform.GetChild(0);
-                weaponStates[weaponType] = new WeaponState
-                {
-                    weaponName = weapon.name.Replace("(Clone)", "").Trim(),
-                    position = weapon.localPosition,
-                    rotation = weapon.localRotation,
-                    parentPath = GetFullPath(weaponTransform)
-                };
-            }
+            inventoryUI.ClearEquip();
+        }
+
+        Equip_UI equipUI = GameManager.Instance.EquipUI;
+
+        if (equipUI != null)
+        {
+            equipUI.AllUnEquip();
+        }
+        else
+        {
+            Debug.LogError("Equip_UI 인스턴스가 존재하지 않습니다.");
         }
     }
 
-    // 무기 상태 불러오기 메서드
-    public void LoadWeaponState()
-    {
-        foreach (var weaponType in weaponTypes)
-        {
-            if (weaponStates.ContainsKey(weaponType))
-            {
-                var weaponState = weaponStates[weaponType];
-                GameObject weaponObject = Resources.Load<GameObject>(weaponState.weaponName);
-                if (weaponObject != null)
-                {
-                    GameObject instantiatedWeapon = Instantiate(weaponObject);
-                    instantiatedWeapon.transform.localPosition = weaponState.position;
-                    instantiatedWeapon.transform.localRotation = weaponState.rotation;
-
-                    // AddItem 메서드를 사용하여 무기 추가
-                    SlotNumber slotNumber = GetComponentInChildren<SlotNumber>();
-                    slotNumber.AddItem(instantiatedWeapon, (Equipment)Enum.Parse(typeof(Equipment), weaponType));
-                }
-            }
-        }
-    }
-
-    // 무기 오브젝트를 찾는 헬퍼 메서드
-    private Transform GetWeaponTransform(string weaponType)
-    {
-        return transform.Find("WeaponTransform/" + weaponType);
-    }
-
-    // Transform 경로를 문자열로 반환하는 헬퍼 메서드
-    private string GetFullPath(Transform transform)
-    {
-        string path = "/" + transform.name;
-        while (transform.parent != null)
-        {
-            transform = transform.parent;
-            path = "/" + transform.name + path;
-        }
-        return path;
-    }
-
-    // 경로를 통해 Transform을 찾는 헬퍼 메서드
-    private Transform FindTransformByPath(Transform root, string path)
-    {
-        return root.Find(path.Substring(root.name.Length + 1));
-    }
 
 #if UNITY_EDITOR
     private void OnDrawGizmos()
@@ -452,13 +406,4 @@ public class Player : MonoBehaviour
         }
     }
 #endif
-}
-
-[System.Serializable]
-public class WeaponState
-{
-    public string weaponName;
-    public Vector3 position;
-    public Quaternion rotation;
-    public string parentPath;
 }

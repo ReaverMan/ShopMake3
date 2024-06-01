@@ -24,9 +24,8 @@ public class Slot_UI_Base : MonoBehaviour
 
     TextMeshProUGUI itemText;
 
-    bool IsEquipment => ItemSlot.ItemData.itemType == ItemType.Gun || ItemSlot.ItemData.itemType == ItemType.Armor 
-        || ItemSlot.ItemData.itemType == ItemType.Pistol || ItemSlot.ItemData.itemType == ItemType.Helmet || 
-        ItemSlot.ItemData.itemType == ItemType.BackPack;
+    bool IsEquipment => ItemSlot.ItemData.itemType == ItemType.Gun || ItemSlot.ItemData.itemType == ItemType.Armor
+        || ItemSlot.ItemData.itemType == ItemType.Helmet || ItemSlot.ItemData.itemType == ItemType.BackPack;
 
     public uint Index => itemSlot.Index;
 
@@ -67,7 +66,7 @@ public class Slot_UI_Base : MonoBehaviour
     /// 슬롯UI의 화면 갱신
     /// </summary>
     private void Refresh()
-    {   
+    {
         if (ItemSlot.IsEmpty)
         {
             // 비어 있을 때
@@ -94,7 +93,7 @@ public class Slot_UI_Base : MonoBehaviour
                 itemText.text = ItemSlot.ItemCount.ToString();    // 아이템 개수 쓰기
                 itemText.alpha = 0;
 
-                
+
             }
 
             switch (ItemSlot.ItemData.itemType)
@@ -105,7 +104,7 @@ public class Slot_UI_Base : MonoBehaviour
                 case ItemType.Grenade:
                     Equipment = Equipment.Throw;
                     break;
-                case ItemType.Vest:
+                case ItemType.Armor:
                     Equipment = Equipment.Vest;
                     break;
                 case ItemType.Helmet:
@@ -117,9 +116,6 @@ public class Slot_UI_Base : MonoBehaviour
                 case ItemType.Buff:
                     Equipment = Equipment.ETC;
                     break;
-                case ItemType.Trap:
-                    Equipment = Equipment.ETC;
-                    break;
             }
         }
         OnRefresh();
@@ -128,7 +124,7 @@ public class Slot_UI_Base : MonoBehaviour
     protected virtual void OnRefresh()
     {
 
-        
+
     }
 
 
