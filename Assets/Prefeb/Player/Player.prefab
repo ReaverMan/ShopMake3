@@ -461,6 +461,7 @@ MonoBehaviour:
   currentWeight: 10
   defense: 1
   animator: {fileID: 0}
+  currentEquipments: []
 --- !u!114 &427344941204559975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -476,7 +477,7 @@ MonoBehaviour:
   firePosition: {fileID: 1402835056701228455}
   bombFactory: {fileID: 6182560130796350293, guid: 8bf67036b3c7dbd409f3036fb485c0a3, type: 3}
   throwPower: 15
-  bulletEffect: {fileID: 7308621815531286358, guid: 1d774911977a3644985557c1efd52a86, type: 3}
+  bulletEffect: {fileID: 0}
   weaponPower: 5
 --- !u!143 &4717979662179565764
 CharacterController:
@@ -609,7 +610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a8cb6f30e849414793860e17924d1ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 0.5
+  mouseSensitivity: 2
   playerBody: {fileID: 1170557410350977315}
   interactableLayerMask:
     serializedVersion: 2

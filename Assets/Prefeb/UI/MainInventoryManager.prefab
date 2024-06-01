@@ -2018,7 +2018,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 299039165da59d34995f7d6e7ef62a44, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 42d23c60716f4874ab595d3f27f9acb9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3760,7 +3760,7 @@ RectTransform:
   m_Children:
   - {fileID: 657056067802610305}
   - {fileID: 1638897313013283686}
-  - {fileID: 2275952692439254964}
+  - {fileID: 7056206746916578992}
   - {fileID: 8300032559145255562}
   - {fileID: 4416083983814830649}
   - {fileID: 5360345172420171095}
@@ -15856,14 +15856,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: EquipBase
       objectReference: {fileID: 0}
+    - target: {fileID: 6491034081656341577, guid: 04b2a885bc087b346955a32ff2352474, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 900
+      objectReference: {fileID: 0}
+    - target: {fileID: 6491034081656341577, guid: 04b2a885bc087b346955a32ff2352474, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 900
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04b2a885bc087b346955a32ff2352474, type: 3}
---- !u!224 &2275952692439254964 stripped
+--- !u!224 &7056206746916578992 stripped
 RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2624940352642377037, guid: 04b2a885bc087b346955a32ff2352474, type: 3}
+  m_CorrespondingSourceObject: {fileID: 6491034081656341577, guid: 04b2a885bc087b346955a32ff2352474, type: 3}
   m_PrefabInstance: {fileID: 4321317906420458233}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4374932605217666026

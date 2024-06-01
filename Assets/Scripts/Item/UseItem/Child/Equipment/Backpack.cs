@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
+// using static UnityEditor.Progress;
 
 public class Backpack : ItemBase
 {
@@ -12,7 +12,7 @@ public class Backpack : ItemBase
         {
             player.limitWeight += amountIncrese;
             player.MaxWeight += amountIncrese;
-            Debug.Log("¹æ¾î·ÂÀÌ Áõ°¡ÇÏ¿´½À´Ï´Ù.");
+            Debug.Log("ë°©ì–´ë ¥ì´ ì¦ê°€í•˜ì˜€ìŠµë‹ˆë‹¤.");
         }
         else
         {
