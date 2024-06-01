@@ -3,7 +3,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -367,73 +369,77 @@ public class Player : MonoBehaviour
         }
         return result;
     }
-    public void SavePlayerStateToJson()
+
+    private Dictionary<string, WeaponState> weaponStates = new Dictionary<string, WeaponState>();
+    private List<string> weaponTypes = new List<string> { "Weapon", "Armor", "Helmet", "Throw", "BackPack", "ETC" };
+
+    // 무기 상태 저장 메서드
+    public void SaveWeaponState()
     {
-        PlayerObj playerobj = new PlayerObj
+        foreach (var weaponType in weaponTypes)
         {
-            ChildObjects = SaveChildObjects() // 자식 오브젝트 상태 저장
-        };
-
-        var settings = new JsonSerializerSettings
-        {
-            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-            Formatting = Newtonsoft.Json.Formatting.Indented
-        };
-
-        string json = JsonConvert.SerializeObject(playerobj, Newtonsoft.Json.Formatting.Indented);
-        File.WriteAllText(Path.Combine(Application.persistentDataPath, "player.json"), json);
-        Debug.Log("플레이어 상태를 저장했습니다.");
-
-    }
-
-    public void LoadPlayerStateFromJson()
-    {
-        string path = Path.Combine(Application.persistentDataPath, "player.json");
-        if (File.Exists(path))
-        {
-            string json = File.ReadAllText(path);
-            PlayerObj playerobj = JsonConvert.DeserializeObject<PlayerObj>(json);
-
-            LoadChildObjects(playerobj.ChildObjects); // 자식 오브젝트 상태 불러오기
-
-            Debug.Log("플레이어 상태를 불러왔습니다.");
-        }
-        else
-        {
-            Debug.LogWarning("저장된 플레이어 상태 데이터가 없습니다.");
-        }
-    }
-
-    private List<ChildObjectState> SaveChildObjects()
-    {
-        List<ChildObjectState> childObjects = new List<ChildObjectState>();
-        foreach (Transform child in transform)
-        {
-            ChildObjectState state = new ChildObjectState
+            Transform weaponTransform = GetWeaponTransform(weaponType);
+            if (weaponTransform != null && weaponTransform.childCount > 0)
             {
-                Name = child.name,
-                Position = child.localPosition,
-                Rotation = child.localRotation,
-                Scale = child.localScale,
-                IsActive = child.gameObject.activeSelf
-            };
-            childObjects.Add(state);
+                Transform weapon = weaponTransform.GetChild(0);
+                weaponStates[weaponType] = new WeaponState
+                {
+                    weaponName = weapon.name.Replace("(Clone)", "").Trim(),
+                    position = weapon.localPosition,
+                    rotation = weapon.localRotation,
+                    parentPath = GetFullPath(weaponTransform)
+                };
+            }
         }
-        return childObjects;
     }
 
-    private void LoadChildObjects(List<ChildObjectState> childObjects)
+    // 무기 상태 불러오기 메서드
+    public void LoadWeaponState()
     {
-        foreach (var state in childObjects)
+        foreach (var weaponType in weaponTypes)
         {
-            GameObject child = new GameObject(state.Name);
-            child.transform.parent = this.transform;
-            child.transform.localPosition = state.Position;
-            child.transform.localRotation = state.Rotation;
-            child.transform.localScale = state.Scale;
-            child.SetActive(state.IsActive);
+            if (weaponStates.ContainsKey(weaponType))
+            {
+                var weaponState = weaponStates[weaponType];
+                GameObject weaponObject = Resources.Load<GameObject>(weaponState.weaponName);
+                if (weaponObject != null)
+                {
+                    GameObject instantiatedWeapon = Instantiate(weaponObject);
+                    instantiatedWeapon.transform.localPosition = weaponState.position;
+                    instantiatedWeapon.transform.localRotation = weaponState.rotation;
+
+                    // AddItem 메서드를 사용하여 무기 추가
+                    SlotNumber slotNumber = GetComponentInChildren<SlotNumber>();
+                    slotNumber.AddItem(instantiatedWeapon, (Equipment)Enum.Parse(typeof(Equipment), weaponType));
+                }
+            }
         }
     }
+
+    // 무기 오브젝트를 찾는 헬퍼 메서드
+    private Transform GetWeaponTransform(string weaponType)
+    {
+        return transform.Find("WeaponTransform/" + weaponType);
+    }
+
+    // Transform 경로를 문자열로 반환하는 헬퍼 메서드
+    private string GetFullPath(Transform transform)
+    {
+        string path = "/" + transform.name;
+        while (transform.parent != null)
+        {
+            transform = transform.parent;
+            path = "/" + transform.name + path;
+        }
+        return path;
+    }
+
+    // 경로를 통해 Transform을 찾는 헬퍼 메서드
+    private Transform FindTransformByPath(Transform root, string path)
+    {
+        return root.Find(path.Substring(root.name.Length + 1));
+    }
+
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
@@ -449,17 +455,10 @@ public class Player : MonoBehaviour
 }
 
 [System.Serializable]
-public class PlayerObj
+public class WeaponState
 {
-    public List<ChildObjectState> ChildObjects; // 자식 오브젝트 상태 저장
-}
-
-[System.Serializable]
-public class ChildObjectState
-{
-    public string Name;
-    public Vector3 Position;
-    public Quaternion Rotation;
-    public Vector3 Scale;
-    public bool IsActive;
+    public string weaponName;
+    public Vector3 position;
+    public Quaternion rotation;
+    public string parentPath;
 }

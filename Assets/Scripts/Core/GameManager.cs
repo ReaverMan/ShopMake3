@@ -123,10 +123,14 @@ public class GameManager : Singleton<GameManager>
     {
         if (sceneName == "InGameScene")
         {
-            player.SavePlayerStateToJson();
             SaveWorldInventory();
             SaveInventory();
             SaveEquip();
+        }
+        Player playerScript = Player.GetComponent<Player>();
+        if (playerScript != null)
+        {
+            playerScript.SaveWeaponState();
         }
         StartCoroutine(LoadScene(sceneName, OnGameStartCompleted));
     }
@@ -135,9 +139,13 @@ public class GameManager : Singleton<GameManager>
     {
         if (sceneName == "MainMenuScene")
         {
-            player.SavePlayerStateToJson();
             SaveInventory();
             SaveEquip();
+        }
+        Player playerScript = Player.GetComponent<Player>();
+        if (playerScript != null)
+        {
+            playerScript.SaveWeaponState();
         }
         StartCoroutine(LoadScene(sceneName, OnGameEnding));
     }
@@ -152,22 +160,29 @@ public class GameManager : Singleton<GameManager>
             yield return null;
         }
 
+        yield return new WaitForSeconds(2f); // 씬 로드 후 2초 대기
+
         if (sceneName == "MainMenuScene")
         {
-            player.LoadPlayerStateFromJson();
             LoadWorldInventory();
             LoadInventory();
             LoadEquip();
         }
         else if (sceneName == "InGameScene")
         {
-            player.LoadPlayerStateFromJson();
             LoadInventory();
             LoadEquip();
         }
 
+        Player playerScript = FindObjectOfType<Player>();
+        if (playerScript != null)
+        {
+            playerScript.LoadWeaponState();
+        }
+
         onLoaded?.Invoke();
     }
+
 
     public void SaveWorldInventory()
     {
@@ -203,6 +218,7 @@ public class GameManager : Singleton<GameManager>
         if (equipUI != null)
             equipUI.Equip.LoadEquipFromJson();
     }
+
 #if UNITY_EDITOR
 
     public void Test_GameLoad()

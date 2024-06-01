@@ -60,6 +60,8 @@ public class WeaponBase : ItemBase
     public Action<ItemCode, int> onReload;    //장비창에 장착될때 인벤토리의 리로딩 함수와 연결 
     public Action<int, int> onAmmoChange;
     ItemCode needType = ItemCode.PistolBullet;
+    private PlayerUI playerUI;
+
     public ItemCode NeedType => needType;
 
     private void Update()
@@ -71,31 +73,27 @@ public class WeaponBase : ItemBase
 
     private void OnEnable()
     {
-        Player player = GetComponentInParent<Player>();
-        if (player != null)
+        Inventory_UI inventoryUI = GameManager.Instance.InventoryUI;
+        playerUI = GameManager.Instance.PlayerUI;
+        if (playerUI != null)
         {
-            PlayerUI playerUI = GameManager.Instance.PlayerUI;
-            Inventory_UI inventoryUI = GameManager.Instance.InventoryUI;
             onAmmoChange += playerUI.Remain.Refresh;
-            onReload += inventoryUI.Inventory.Reload;
-
-            inventoryUI.Inventory.onReload += Reload;
             playerUI.Remain.Refresh(currentAmmo, maxAmmo);
         }
-
+        if (inventoryUI != null)
+        {
+            onReload += inventoryUI.Inventory.Reload;
+            inventoryUI.Inventory.onReload += Reload;
+        }
     }
 
     private void OnDisable()
     {
-        Player player = GetComponentInParent<Player>();
-        if (player != null)
+        if (playerUI != null)
         {
-            PlayerUI playerUI = GameManager.Instance.PlayerUI;
-
             playerUI.Remain.Refresh(0, 0);
-
-            onAmmoChange = null;
         }
+        onAmmoChange = null;
     }
 
     // ------------------------------------------------------------------------
