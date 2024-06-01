@@ -81,17 +81,6 @@ public class ShopInventoryUI : MonoBehaviour
     }
 
 
-    public void UpdateSlots()
-    {
-        for (int i = 0; i < shopSlots.Length && i < shopInventory.items.Length; i++)
-        {
-            if (shopInventory.items[i] != null)
-            {
-                shopSlots[i].InitializeSlot(shopInventory.items[i]);
-            }
-        }
-    }
-
     // 상점 열기 함수
     public void Open()
     {
@@ -110,9 +99,26 @@ public class ShopInventoryUI : MonoBehaviour
     public void AddBasicItem()
     {
         shopInventory.AddItem(ItemCode.Pistol);
-        shopInventory.AddItem(ItemCode.Rifle);
-        shopInventory.AddItem(ItemCode.Shotgun);
-        shopInventory.AddItem(ItemCode.Sniper);
-        shopInventory.AddItem(ItemCode.Key);
+        shopInventory.AddItem(ItemCode.Knife);
+        shopInventory.AddItem(ItemCode.LowHelmet);
+        shopInventory.AddItem(ItemCode.Knife);
+        shopInventory.AddItem(ItemCode.LowVest);
+        shopInventory.AddItem(ItemCode.Knife);
+        shopInventory.AddItem(ItemCode.LowBackpack);
+        shopInventory.AddItem(ItemCode.Knife);
+        shopInventory.AddItem(ItemCode.SmallHeal);
+        shopInventory.AddItem(ItemCode.Knife);
+        shopInventory.AddItem(ItemCode.Small);
+        shopInventory.AddItem(ItemCode.Knife);
+        shopInventory.AddItem(ItemCode.SmallStrength);
+        shopInventory.AddItem(ItemCode.Knife);
+        shopInventory.AddItem(ItemCode.PistolBullet);
+        shopInventory.AddItem(ItemCode.Knife);
+        shopInventory.AddItem(ItemCode.RifleBullet);
+        shopInventory.AddItem(ItemCode.Knife);
+        shopInventory.AddItem(ItemCode.ShotgunBullet);
+        shopInventory.AddItem(ItemCode.Knife);
+        shopInventory.AddItem(ItemCode.NoiseGrenade);
     }
+
 }

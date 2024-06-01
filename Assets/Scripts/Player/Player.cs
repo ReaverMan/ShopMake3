@@ -48,6 +48,7 @@ public class Player : MonoBehaviour
             {
                 weight = value;
                 onWeightChange?.Invoke(weight);
+
             }
         }
     }
@@ -268,23 +269,26 @@ public class Player : MonoBehaviour
     public void Die()
     {
         inputActions.Player.Disable();
-        ClearInventoryOnDeath();
+        DropAllInventoryItems();  // 인벤토리의 모든 아이템을 버리는 함수 호출
         onDie?.Invoke();
         GoToMainMenu();  // MainMenuScene으로 전환
     }
-    private void ClearInventoryOnDeath()
+    private void DropAllInventoryItems()
     {
         Inventory_UI inventoryUI = GameManager.Instance.InventoryUI;
         if (inventoryUI != null)
         {
-            inventoryUI.Inventory.ClearInventory();
+            inventoryUI.Inventory.DropAllItems();
         }
-        Debug.Log("플레이어가 사망했음으로 인벤토리의 모든 아이템을 삭제합니다.");
+        Debug.Log("플레이어 사망 시 인벤토리의 모든 아이템을 버림");
     }
-    private void GoToMainMenu()
+    public void GoToMainMenu()
     {
         SceneManager.LoadScene("MainMenuScene");
         Debug.Log("MainMenuScene으로 전환");
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     Transform firePosition;

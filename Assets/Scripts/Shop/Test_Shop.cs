@@ -21,11 +21,6 @@ public class Test_Shop : MonoBehaviour
     void InitializeShopInventory()
     {
         shopInventory = null;
-        shopInventory.AddItem(ItemCode.Pistol);
-        shopInventory.AddItem(ItemCode.Rifle);
-        shopInventory.AddItem(ItemCode.Shotgun);
-        shopInventory.AddItem(ItemCode.Sniper);
-        shopInventory.AddItem(ItemCode.Key);
 
         if (shopInventoryUI != null)
         {

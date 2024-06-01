@@ -150,7 +150,7 @@ public class WorldInventory_UI : MonoBehaviour
         Inventory_UI inven;
         inven = rect.GetComponentInParent<Inventory_UI>();
 
-        if (inven != null)
+        if (inven != null && slot != null)
         {
             inven.PlusValue(slot);
         }

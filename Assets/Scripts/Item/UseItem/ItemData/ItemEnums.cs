@@ -25,8 +25,7 @@ public enum ItemCode    //아이템 개별 식별용 ID
     SmallHeal = 0,
     MiddleHeal = 1,
     BigHeal = 2,
-    Small
-        = 3,
+    Small = 3,
     MiddleSpeed = 4,
     BigSpeed = 5,
     SmallStrength = 6,
@@ -69,5 +68,5 @@ public enum ItemCode    //아이템 개별 식별용 ID
     SniperScope = 43,
     SniperSilencer = 44,
     SniperStock = 45,
-
+    Knife= 46,
 }

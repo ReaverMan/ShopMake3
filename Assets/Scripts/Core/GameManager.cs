@@ -48,6 +48,13 @@ public class GameManager : Singleton<GameManager>
         LoadComponentReferences();
         CheckCurrentScene();
         InitializeEquip();  // Equip 초기화
+
+        Inventory inven = new Inventory(this);
+        if (inventoryUI != null)
+        {
+            inventoryUI.InitializeInventory(inven);
+        }
+
         WorldInventory worldInven = new WorldInventory(this);
         if (worldInventoryUI != null)
         {
@@ -55,13 +62,6 @@ public class GameManager : Singleton<GameManager>
         }
 
         shopInventory = new ShopInventory();
-
-        Inventory inven = new Inventory(this);
-        if (InventoryUI != null)
-        {
-            InventoryUI.InitializeInventory(inven);
-        }
-
     }
 
     private void InitializeEquip()
@@ -127,6 +127,8 @@ public class GameManager : Singleton<GameManager>
             player.UnequipAllItems();
             SaveWorldInventory();
             SaveInventory();
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
         StartCoroutine(LoadScene(sceneName, OnGameStartCompleted));
     }
@@ -138,6 +140,10 @@ public class GameManager : Singleton<GameManager>
             SaveEquipmentData();  // 장비 데이터 저장
             player.UnequipAllItems();
             SaveInventory();
+
+            OnGameEnding?.Invoke();
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
         }
         StartCoroutine(LoadScene(sceneName, OnGameEnding));
     }
@@ -150,7 +156,6 @@ public class GameManager : Singleton<GameManager>
     public void LoadEquipmentData()
     {
         equip.LoadEquipmentData(equipmentDataPath);
-        // equip.ReEquipLoadedItems(); // 장비를 다시 장착하는 코드 제거
     }
 
     private IEnumerator LoadScene(string sceneName, SceneAction onLoaded)
@@ -173,7 +178,7 @@ public class GameManager : Singleton<GameManager>
         else if (sceneName == "InGameScene")
         {
             LoadInventory();
-            // LoadEquipmentData();  // 장비 데이터 로드 및 다시 장착하는 코드 제거
+            OnGameStartCompleted?.Invoke();
         }
 
         Player playerScript = FindObjectOfType<Player>();
@@ -182,7 +187,6 @@ public class GameManager : Singleton<GameManager>
             playerScript.InitializeEquipments();  // Player 클래스에서 장비 초기화
         }
 
-        onLoaded?.Invoke();
     }
 
     public void SaveWorldInventory()
@@ -208,7 +212,6 @@ public class GameManager : Singleton<GameManager>
         if (inventoryUI != null)
             inventoryUI.Inventory.LoadInventoryFromJson();
     }
-
 #if UNITY_EDITOR
 
     public void Test_GameLoad()

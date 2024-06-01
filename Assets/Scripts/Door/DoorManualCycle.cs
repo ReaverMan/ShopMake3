@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DoorManualCycle : DoorManual
 {
-    [Range(600, 1200)]  //(10∫–-20∫–)
+    [Range(600, 1200)]  //(10Î∂Ñ-20Î∂Ñ)
     public float cycle = 1200.0f;
-    public float openPeriod = 300.0f; //5∫–
+    public float openPeriod = 300.0f; //5Î∂Ñ
 
     float cycleTime = 0.0f;
     float periodTime = 0.0f;
@@ -56,8 +57,7 @@ public class DoorManualCycle : DoorManual
     {
         if (preOpen())
         {
-            Debug.Log("≈ª√‚");
-            //»≠∏È¿¸»Ø(∞‘¿”∏ﬁ¥∫)
+            GameManager.Instance.EndGame("MainMenuScene");
         }
         else 
         {

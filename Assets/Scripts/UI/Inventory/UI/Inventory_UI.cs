@@ -103,17 +103,9 @@ public class Inventory_UI : MonoBehaviour
             Owner.onWeightChange += weightPanel.Refresh;
             weightPanel.Refresh(Owner.Weight);
         }
-
         Close();
 
         //inventory.onReload += GameManager.Instance.WeaponBase.ReLoad;
-    }
-
-    // 인벤토리를 비우는 메서드 추가
-    public void ClearInventory()
-    {
-        inventory.ClearInventory();
-        Debug.Log("인벤토리 비우기 완료");
     }
 
     private void Start()
@@ -182,7 +174,7 @@ public class Inventory_UI : MonoBehaviour
         WorldInventory_UI worldInven;
         worldInven = rect.GetComponentInParent<WorldInventory_UI>();
 
-        if (worldInven != null)
+        if (worldInven != null && slot != null)
         {
             inventory.MinusValue(slot, (int)slot.ItemCount);
         }

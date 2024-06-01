@@ -477,7 +477,7 @@ MonoBehaviour:
   firePosition: {fileID: 1402835056701228455}
   bombFactory: {fileID: 6182560130796350293, guid: 8bf67036b3c7dbd409f3036fb485c0a3, type: 3}
   throwPower: 15
-  bulletEffect: {fileID: 0}
+  bulletEffect: {fileID: 7308621815531286358, guid: 1d774911977a3644985557c1efd52a86, type: 3}
   weaponPower: 5
 --- !u!143 &4717979662179565764
 CharacterController:

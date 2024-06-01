@@ -176,6 +176,7 @@ public class Inventory
         Debug.Log(result);
         return result;
     }
+    
 
     public void MoveItem(ItemSlot from, ItemSlot to)
     {
@@ -304,7 +305,20 @@ public class Inventory
         
     }
 
-
+    /// <summary>
+    /// 인벤토리에 있는 모든 아이템을 버리는 함수
+    /// </summary>
+    public void DropAllItems()
+    {
+        foreach (var slot in slots)
+        {
+            if (!slot.IsEmpty)
+            {
+                RemoveItem(slot.ItemData.itemId, slot.ItemCount);
+                // World.DropItem(slot.ItemData, slot.ItemCount, owner.transform.position);
+            }
+        }
+    }
     /// <summary>
     /// 슬롯 인덱스가 적절한 인덱스인지 확인하는 함수
     /// </summary>
