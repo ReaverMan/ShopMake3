@@ -139,6 +139,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemCode: 20
-  Price: 100
-  Weight: 5
+  Price: 3
+  Weight: 0
   type: 0

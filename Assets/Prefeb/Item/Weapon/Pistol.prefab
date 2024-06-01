@@ -29,13 +29,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2738520558268228719}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0, y: 0.1, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!33 &1937997863159198064
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -143,19 +143,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemCode: 15
   Price: 400
-  Weight: 1.5
+  Weight: 1
   maxAmmo: 12
-  fireRate: 1
-  weight: 1.5
-  price: 150
+  fireRate: 0.5
+  weight: 1
+  price: 400
   durability: 30
-  recoil: 1
-  sightingRange: 0
+  recoil: 0
+  sightingRange: 5
   ammunitionType: 0
   damage: 5
-  headDamage: 10
+  headDamage: 5
   accuracy: 1
   critRate: 0.5
   muzzleVelocity: 1
-  noiseVelocity: 7
+  noiseVelocity: 5
   bulletEffect: {fileID: 7308621815531286358, guid: 1d774911977a3644985557c1efd52a86, type: 3}

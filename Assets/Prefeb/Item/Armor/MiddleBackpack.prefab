@@ -26,7 +26,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 125acaae8a5462d4b811fbdc35a2ac83, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 125acaae8a5462d4b811fbdc35a2ac83, type: 3}
       propertyPath: m_LocalPosition.z
@@ -34,27 +34,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 125acaae8a5462d4b811fbdc35a2ac83, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 125acaae8a5462d4b811fbdc35a2ac83, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 125acaae8a5462d4b811fbdc35a2ac83, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 125acaae8a5462d4b811fbdc35a2ac83, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 125acaae8a5462d4b811fbdc35a2ac83, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 125acaae8a5462d4b811fbdc35a2ac83, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 125acaae8a5462d4b811fbdc35a2ac83, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -127,4 +127,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemCode: 34
   Price: 600
-  Weight: 6
+  Weight: 5
+  amountIncrese: 20

@@ -16,7 +16,7 @@ MonoBehaviour:
   itemType: 4
   itemName: 9mm
   itemImage: {fileID: 21300000, guid: b6118a78da8c3ee418185c48db9370a1, type: 3}
-  weight: 2
-  maxItemCount: 15
+  weight: 0
+  maxItemCount: 30
   itemPrefab: {fileID: 4666350479886481300, guid: fc981d6859299b548a99e93970cb6c15, type: 3}
-  Price: 0
+  Price: 3

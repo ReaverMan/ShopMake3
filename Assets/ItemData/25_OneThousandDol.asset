@@ -17,6 +17,6 @@ MonoBehaviour:
   itemName: "1000\uC6D0"
   itemImage: {fileID: 21300000, guid: 041b211fca5b52d4ea177af7ae31a5c3, type: 3}
   weight: 0
-  maxItemCount: 0
-  itemPrefab: {fileID: 8239965599649921239, guid: d471dfce0feaa564c95a9edabfcd6c5c, type: 3}
-  Price: 0
+  maxItemCount: 5
+  itemPrefab: {fileID: 8239965599649921239, guid: 7635b429c61238948a59c5c53aab47d6, type: 3}
+  Price: 1000

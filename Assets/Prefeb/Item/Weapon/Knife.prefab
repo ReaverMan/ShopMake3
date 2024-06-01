@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4181197319725836}
   - component: {fileID: 33408713436287520}
   - component: {fileID: 23911673812415842}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: lod3(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4737020250435732}
   - component: {fileID: 33099266220820928}
   - component: {fileID: 23292321028205710}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: lod2(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,9 +177,9 @@ GameObject:
   - component: {fileID: 4390119426965160}
   - component: {fileID: 23894503687208690}
   - component: {fileID: -4376869111532198069}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Knife
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -258,22 +258,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemCode: 46
-  Price: 1000
-  Weight: 0.7
-  maxAmmo: 10
-  fireRate: 0.1
-  weight: 0.7
-  price: 0
+  Price: 300
+  Weight: 1
+  maxAmmo: 0
+  fireRate: 1
+  weight: 1
+  price: 300
   durability: 0
   recoil: 0
   sightingRange: 0
   ammunitionType: 0
   damage: 5
   headDamage: 10
-  accuracy: 0
-  critRate: 0
-  muzzleVelocity: 0
+  accuracy: 1
+  critRate: 1
+  muzzleVelocity: 1
   noiseVelocity: 7
+  bulletEffect: {fileID: 7308621815531286358, guid: 1d774911977a3644985557c1efd52a86, type: 3}
 --- !u!1 &1551345282138878
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,7 +286,7 @@ GameObject:
   - component: {fileID: 4610362900768286}
   - component: {fileID: 33945919329020036}
   - component: {fileID: 23800238845034596}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: lod1(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -368,7 +369,7 @@ GameObject:
   - component: {fileID: 4408011965861364}
   - component: {fileID: 33493954380660138}
   - component: {fileID: 23226488061554170}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: lod0(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

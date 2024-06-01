@@ -16,7 +16,7 @@ MonoBehaviour:
   itemType: 4
   itemName: 5mm
   itemImage: {fileID: 21300000, guid: b2bd4894823f2e04f91c887ef4b51567, type: 3}
-  weight: 4
-  maxItemCount: 30
+  weight: 0
+  maxItemCount: 20
   itemPrefab: {fileID: 4272666993980208316, guid: 32d0bbd3f732ee74c85f6c12374102a4, type: 3}
-  Price: 0
+  Price: 5

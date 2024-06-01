@@ -35,21 +35,51 @@ public class ShopInventoryUI : MonoBehaviour
             return;
         }
 
-        for (uint i = 0; i < shopSlots.Length; i++)
+        if (shopSlots == null || shopSlots.Length == 0)
         {
-            shopSlots[i].InitializeSlot(shopInventory[i]);
-            shopSlots[i].onRightClick += OnItemRightClick;
+            Debug.LogError("shopSlots 배열이 초기화되지 않았습니다!");
+            return;
         }
 
-        shopBuyMenu.Close();
-    }
+        for (uint i = 0; i < shopSlots.Length; i++)
+        {
+            if (shopSlots[i] != null)
+            {
+                shopSlots[i].InitializeSlot(shopInventory[i]);
+                shopSlots[i].onRightClick += OnItemRightClick;
+            }
+            else
+            {
+                Debug.LogError($"shopSlots[{i}]가 null입니다.");
+            }
+        }
 
+        if (shopBuyMenu != null)
+        {
+            shopBuyMenu.Close();
+        }
+        else
+        {
+            Debug.LogError("shopBuyMenu가 null입니다.");
+        }
+    }
     private void OnItemRightClick(uint index)
     {
-        Slot_UI target = shopSlots[index];
-        shopBuyMenu.Open(target.ItemSlot);
-        shopBuyMenu.MovePosition(Mouse.current.position.ReadValue());
+        if (index < shopSlots.Length && shopSlots[index] != null)
+        {
+            Slot_UI target = shopSlots[index];
+            if (target != null && target.ItemSlot != null)
+            {
+                shopBuyMenu.Open(target.ItemSlot);
+                shopBuyMenu.MovePosition(Mouse.current.position.ReadValue());
+            }
+            else
+            {
+                Debug.LogError($"잘못된 인덱스 또는 null slot: {index}");
+            }
+        }
     }
+
 
     public void UpdateSlots()
     {

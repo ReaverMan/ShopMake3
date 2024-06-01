@@ -69,9 +69,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemCode: 3
   Price: 25
-  Weight: 3
-  amountBuff: 3
-  Maxduration: 3
+  Weight: 1
+  amountBuff: 1
+  Maxduration: 9
 --- !u!1001 &3916112300030745948
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -69,7 +69,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemCode: 6
   Price: 25
-  Weight: 3
+  Weight: 1
   amountBuff: 10
   Maxduration: 10
 --- !u!1001 &3754267300355779330

@@ -246,8 +246,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemCode: 29
   Price: 900
-  Weight: 9
-  amountDefense: 100
+  Weight: 3
+  amountDefense: 10
 --- !u!135 &-3392504582423213048
 SphereCollider:
   m_ObjectHideFlags: 0

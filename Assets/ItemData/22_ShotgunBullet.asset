@@ -16,7 +16,7 @@ MonoBehaviour:
   itemType: 4
   itemName: 12g
   itemImage: {fileID: 21300000, guid: 8f65519e8e7311f4e8df2b7e6da8427f, type: 3}
-  weight: 6
-  maxItemCount: 8
+  weight: 0
+  maxItemCount: 10
   itemPrefab: {fileID: 6907359621819919639, guid: 0283807b94acf524ca463b52e4a9b64d, type: 3}
-  Price: 0
+  Price: 7

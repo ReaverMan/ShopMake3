@@ -155,5 +155,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemCode: 31
   Price: 600
-  Weight: 6
-  amountDefense: 50
+  Weight: 2
+  amountDefense: 5

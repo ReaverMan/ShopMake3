@@ -48,13 +48,6 @@ public class GameManager : Singleton<GameManager>
         LoadComponentReferences();
         CheckCurrentScene();
         InitializeEquip();  // Equip 초기화
-
-        Inventory inven = new Inventory(this);
-        if (InventoryUI != null)
-        {
-            InventoryUI.InitializeInventory(inven);
-        }
-
         WorldInventory worldInven = new WorldInventory(this);
         if (worldInventoryUI != null)
         {
@@ -62,6 +55,13 @@ public class GameManager : Singleton<GameManager>
         }
 
         shopInventory = new ShopInventory();
+
+        Inventory inven = new Inventory(this);
+        if (InventoryUI != null)
+        {
+            InventoryUI.InitializeInventory(inven);
+        }
+
     }
 
     private void InitializeEquip()

@@ -142,6 +142,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemCode: 22
-  Price: 250
-  Weight: 6
+  Price: 7
+  Weight: 0
   type: 2

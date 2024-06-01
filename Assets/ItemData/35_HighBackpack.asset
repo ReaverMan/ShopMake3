@@ -16,7 +16,7 @@ MonoBehaviour:
   itemType: 9
   itemName: "3\uB808\uBCA8 \uAC00\uBC29"
   itemImage: {fileID: 21300000, guid: 73b3a3add0bb4984e88aea2a89533794, type: 3}
-  weight: 0
-  maxItemCount: 0
+  weight: 7
+  maxItemCount: 1
   itemPrefab: {fileID: 9098046574500050342, guid: 3bf967c408d1c8747839b16e5db61cee, type: 3}
-  Price: 0
+  Price: 900

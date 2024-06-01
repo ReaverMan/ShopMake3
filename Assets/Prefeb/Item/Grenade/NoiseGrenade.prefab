@@ -48,10 +48,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemCode: 11
-  Price: 200
-  Weight: 3
+  Price: 10
+  Weight: 0
   NoiseRange: 5
   expoltionEffect: {fileID: 0}
+  isActive: 0
   noiseVolume: 10
 --- !u!54 &6728267175054695613
 Rigidbody:

@@ -28,14 +28,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3258824575005133416}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1156777646980637769}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!54 &4544189398632354926
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -98,11 +98,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemCode: 9
   Price: 300
-  Weight: 5
-  NoiseRange: 5
+  Weight: 2
+  NoiseRange: 7
   expoltionEffect: {fileID: 442555975382587496, guid: 179a102f98493ea4db9333f48de52435, type: 3}
+  isActive: 0
   grenadeDamage: 100
-  targetsTrackDelay: 0.5
+  targetsTrackDelay: 0.3
 --- !u!135 &3590397272095028585
 SphereCollider:
   m_ObjectHideFlags: 0

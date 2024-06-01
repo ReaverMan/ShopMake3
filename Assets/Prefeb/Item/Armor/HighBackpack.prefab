@@ -34,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8ab866a7ceedba84ab67896598f9af33, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8ab866a7ceedba84ab67896598f9af33, type: 3}
       propertyPath: m_LocalRotation.x
@@ -42,7 +42,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8ab866a7ceedba84ab67896598f9af33, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8ab866a7ceedba84ab67896598f9af33, type: 3}
       propertyPath: m_LocalRotation.z
@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8ab866a7ceedba84ab67896598f9af33, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8ab866a7ceedba84ab67896598f9af33, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -122,7 +122,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemCode: 35
   Price: 900
-  Weight: 9
+  Weight: 7
+  amountIncrese: 30
 --- !u!65 &6006323615750821633
 BoxCollider:
   m_ObjectHideFlags: 0
