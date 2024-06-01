@@ -1,3 +1,4 @@
+using System.IO;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using System.Collections;
@@ -32,6 +33,13 @@ public class GameManager : Singleton<GameManager>
     public delegate void SceneAction();
     public event SceneAction OnGameStartCompleted;
     public event SceneAction OnGameEnding;
+
+    private string equipmentDataPath;
+
+    private void Awake()
+    {
+        equipmentDataPath = Path.Combine(Application.persistentDataPath, "equipmentData.json");
+    }
 
     protected override void OnInitialize()
     {
@@ -115,6 +123,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (sceneName == "InGameScene")
         {
+            SaveEquipmentData();  // 장비 데이터 저장
             player.UnequipAllItems();
             SaveWorldInventory();
             SaveInventory();
@@ -126,10 +135,22 @@ public class GameManager : Singleton<GameManager>
     {
         if (sceneName == "MainMenuScene")
         {
+            SaveEquipmentData();  // 장비 데이터 저장
             player.UnequipAllItems();
             SaveInventory();
         }
         StartCoroutine(LoadScene(sceneName, OnGameEnding));
+    }
+
+    private void SaveEquipmentData()
+    {
+        equip.SaveEquipmentData(equipmentDataPath);
+    }
+
+    public void LoadEquipmentData()
+    {
+        equip.LoadEquipmentData(equipmentDataPath);
+        // equip.ReEquipLoadedItems(); // 장비를 다시 장착하는 코드 제거
     }
 
     private IEnumerator LoadScene(string sceneName, SceneAction onLoaded)
@@ -152,11 +173,13 @@ public class GameManager : Singleton<GameManager>
         else if (sceneName == "InGameScene")
         {
             LoadInventory();
+            // LoadEquipmentData();  // 장비 데이터 로드 및 다시 장착하는 코드 제거
         }
 
         Player playerScript = FindObjectOfType<Player>();
         if (playerScript != null)
         {
+            playerScript.InitializeEquipments();  // Player 클래스에서 장비 초기화
         }
 
         onLoaded?.Invoke();
@@ -185,9 +208,6 @@ public class GameManager : Singleton<GameManager>
         if (inventoryUI != null)
             inventoryUI.Inventory.LoadInventoryFromJson();
     }
-
-
-
 
 #if UNITY_EDITOR
 

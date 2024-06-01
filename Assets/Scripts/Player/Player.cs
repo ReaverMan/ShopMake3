@@ -268,7 +268,23 @@ public class Player : MonoBehaviour
     public void Die()
     {
         inputActions.Player.Disable();
+        ClearInventoryOnDeath();
         onDie?.Invoke();
+        GoToMainMenu();  // MainMenuScene으로 전환
+    }
+    private void ClearInventoryOnDeath()
+    {
+        Inventory_UI inventoryUI = GameManager.Instance.InventoryUI;
+        if (inventoryUI != null)
+        {
+            inventoryUI.Inventory.ClearInventory();
+        }
+        Debug.Log("플레이어가 사망했음으로 인벤토리의 모든 아이템을 삭제합니다.");
+    }
+    private void GoToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenuScene");
+        Debug.Log("MainMenuScene으로 전환");
     }
 
     Transform firePosition;
@@ -391,6 +407,10 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("Equip_UI 인스턴스가 존재하지 않습니다.");
         }
+    }
+    public void InitializeEquipments()
+    {
+        GameManager.Instance.LoadEquipmentData();
     }
 
 

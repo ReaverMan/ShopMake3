@@ -107,10 +107,14 @@ public class Inventory_UI : MonoBehaviour
         Close();
 
         //inventory.onReload += GameManager.Instance.WeaponBase.ReLoad;
-
     }
 
-
+    // 인벤토리를 비우는 메서드 추가
+    public void ClearInventory()
+    {
+        inventory.ClearInventory();
+        Debug.Log("인벤토리 비우기 완료");
+    }
 
     private void Start()
     {

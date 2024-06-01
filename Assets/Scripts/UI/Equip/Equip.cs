@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class Equip
@@ -135,5 +137,97 @@ public class Equip
             }
         }
         return null; // 비어 있는 슬롯이 없으면 null 반환
+    }
+    public void SaveEquipmentData(string path)
+    {
+        List<EquipmentData> equipmentDataList = new List<EquipmentData>();
+        foreach (var slot in slots)
+        {
+            if (!slot.IsEmpty)
+            {
+                uint itemId = (uint)slot.ItemData.itemId; // ItemCode를 uint로 변환
+                ItemType itemType = slot.ItemData.itemType;
+                equipmentDataList.Add(new EquipmentData(itemId, itemType));
+            }
+        }
+        string json = JsonUtility.ToJson(new EquipmentDataWrapper(equipmentDataList));
+        File.WriteAllText(path, json);
+        Debug.Log($"장비 데이터 저장됨: {json}");
+    }
+
+    public void LoadEquipmentData(string path)
+    {
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            EquipmentDataWrapper wrapper = JsonUtility.FromJson<EquipmentDataWrapper>(json);
+            foreach (var data in wrapper.equipments)
+            {
+                ItemCode itemCode = (ItemCode)data.itemId; // uint를 ItemCode로 변환
+                AddItem(itemCode);
+            }
+            Debug.Log($"장비 데이터 로드됨: {json}");
+        }
+        else
+        {
+            Debug.LogWarning("장비 데이터 파일을 찾을 수 없습니다.");
+        }
+    }
+
+    public void ReEquipLoadedItems()
+    {
+        foreach (var slot in slots)
+        {
+            if (!slot.IsEmpty)
+            {
+                Equipment equipment = ConvertItemTypeToEquipment(slot.ItemData.itemType);
+                Owner.Equipped(equipment);
+            }
+        }
+    }
+
+    private Equipment ConvertItemTypeToEquipment(ItemType itemType)
+    {
+        switch (itemType)
+        {
+            case ItemType.Gun:
+                return Equipment.Gun;
+            case ItemType.Grenade:
+                return Equipment.Throw;
+            case ItemType.Helmet:
+                return Equipment.Helmet;
+            case ItemType.Armor:
+                return Equipment.Vest;
+            case ItemType.BackPack:
+                return Equipment.BackPack;
+            // 필요한 경우 다른 아이템 타입도 추가합니다.
+            default:
+                return Equipment.None; // 기본값을 반환합니다.
+        }
+    }
+
+}
+
+    [System.Serializable]
+public class EquipmentData
+{
+    public uint itemId;
+    public ItemType itemType;
+
+    public EquipmentData(uint itemId, ItemType itemType)
+    {
+        this.itemId = itemId;
+        this.itemType = itemType;
+    }
+}
+
+[System.Serializable]
+public class EquipmentDataWrapper
+{
+    public List<EquipmentData> equipments;
+
+    public EquipmentDataWrapper(List<EquipmentData> equipments)
+    {
+        this.equipments = equipments;
     }
 }
