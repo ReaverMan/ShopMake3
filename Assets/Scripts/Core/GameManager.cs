@@ -130,6 +130,7 @@ public class GameManager : Singleton<GameManager>
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }
+        SaveAllData();
         StartCoroutine(LoadScene(sceneName, OnGameStartCompleted));
     }
 
@@ -140,13 +141,16 @@ public class GameManager : Singleton<GameManager>
             SaveEquipmentData();  // 장비 데이터 저장
             player.UnequipAllItems();
             SaveInventory();
+            SaveWorldInventoryMoney();
 
             OnGameEnding?.Invoke();
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.Confined;
         }
+        SaveAllData();
         StartCoroutine(LoadScene(sceneName, OnGameEnding));
     }
+
 
     private void SaveEquipmentData()
     {
@@ -172,12 +176,13 @@ public class GameManager : Singleton<GameManager>
 
         if (sceneName == "MainMenuScene")
         {
-            LoadWorldInventory();
+            LoadWorldInventoryMoney();
             LoadInventory();
         }
         else if (sceneName == "InGameScene")
         {
             LoadInventory();
+            LoadPlayerWeight();
             OnGameStartCompleted?.Invoke();
         }
 
@@ -187,7 +192,27 @@ public class GameManager : Singleton<GameManager>
             playerScript.InitializeEquipments();  // Player 클래스에서 장비 초기화
         }
 
+        onLoaded?.Invoke();
     }
+
+    public void SaveAllData()
+    {
+        SavePlayerWeight();
+        if (SceneManager.GetActiveScene().name == "MainMenuScene")
+        {
+            SaveWorldInventoryMoney();
+        }
+    }
+
+    public void LoadAllData()
+    {
+        LoadPlayerWeight();
+        if (SceneManager.GetActiveScene().name == "MainMenuScene")
+        {
+            LoadWorldInventoryMoney();
+        }
+    }
+
 
     public void SaveWorldInventory()
     {
@@ -212,6 +237,38 @@ public class GameManager : Singleton<GameManager>
         if (inventoryUI != null)
             inventoryUI.Inventory.LoadInventoryFromJson();
     }
+    public void SavePlayerWeight()
+    {
+        if (player != null)
+        {
+            player.SavePlayerData();
+        }
+    }
+
+    public void LoadPlayerWeight()
+    {
+        if (player != null)
+        {
+            player.LoadPlayerData();
+        }
+    }
+
+    public void SaveWorldInventoryMoney()
+    {
+        if (worldInventoryUI != null)
+        {
+            worldInventoryUI.SaveWorldInventoryData();
+        }
+    }
+
+    public void LoadWorldInventoryMoney()
+    {
+        if (worldInventoryUI != null)
+        {
+            worldInventoryUI.LoadWorldInventoryData();
+        }
+    }
+
 #if UNITY_EDITOR
 
     public void Test_GameLoad()

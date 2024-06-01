@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    // 요거 저장해야함
     float weight = 0;
     public float Weight
     {
@@ -50,6 +51,44 @@ public class Player : MonoBehaviour
                 onWeightChange?.Invoke(weight);
 
             }
+        }
+    }
+
+    // 데이터를 저장할 구조체 정의
+    [System.Serializable]
+    public struct PlayerData
+    {
+        public float weight;
+        public int money;
+    }
+
+    public void SavePlayerData()
+    {
+        PlayerData data = new PlayerData
+        {
+            weight = this.Weight,
+        };
+
+        string json = JsonConvert.SerializeObject(data, Formatting.Indented);
+        File.WriteAllText(Path.Combine(Application.persistentDataPath, "playerData.json"), json);
+        Debug.Log("플레이어 데이터를 저장했습니다.");
+    }
+
+    public void LoadPlayerData()
+    {
+        string path = Path.Combine(Application.persistentDataPath, "playerData.json");
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            PlayerData data = JsonConvert.DeserializeObject<PlayerData>(json);
+
+            this.Weight = data.weight;
+
+            Debug.Log("플레이어 데이터를 불러왔습니다.");
+        }
+        else
+        {
+            Debug.LogWarning("저장된 플레이어 데이터가 없습니다.");
         }
     }
 

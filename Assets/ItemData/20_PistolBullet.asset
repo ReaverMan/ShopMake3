@@ -19,4 +19,4 @@ MonoBehaviour:
   weight: 0
   maxItemCount: 30
   itemPrefab: {fileID: 4666350479886481300, guid: fc981d6859299b548a99e93970cb6c15, type: 3}
-  Price: 3
+  Price: 0

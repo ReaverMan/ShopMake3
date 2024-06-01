@@ -1,6 +1,8 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using TMPro;
 using Unity.VisualScripting;
@@ -49,6 +51,42 @@ public class WorldInventory_UI : MonoBehaviour
                 money = value;
                 onMoneyChange?.Invoke(money);
             }
+        }
+    }
+    // 데이터를 저장할 구조체 정의
+    [System.Serializable]
+    public struct WorldInventoryData
+    {
+        public int money;
+    }
+
+    public void SaveWorldInventoryData()
+    {
+        WorldInventoryData data = new WorldInventoryData
+        {
+            money = this.Money
+        };
+
+        string json = JsonConvert.SerializeObject(data, Formatting.Indented);
+        File.WriteAllText(Path.Combine(Application.persistentDataPath, "worldInventoryData.json"), json);
+        Debug.Log("월드 인벤토리 데이터를 저장했습니다.");
+    }
+
+    public void LoadWorldInventoryData()
+    {
+        string path = Path.Combine(Application.persistentDataPath, "worldInventoryData.json");
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            WorldInventoryData data = JsonConvert.DeserializeObject<WorldInventoryData>(json);
+
+            this.Money = data.money;
+
+            Debug.Log("월드 인벤토리 데이터를 불러왔습니다.");
+        }
+        else
+        {
+            Debug.LogWarning("저장된 월드 인벤토리 데이터가 없습니다.");
         }
     }
 
