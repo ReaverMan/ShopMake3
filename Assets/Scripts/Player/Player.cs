@@ -12,7 +12,7 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    public float moveSpeed = 3f;
+    public float moveSpeed = 5f;
     public float jumpPower = 5f;
     Inventory inven;
 
@@ -96,7 +96,7 @@ public class Player : MonoBehaviour
     public PlayerUI PlayerUI => playerUI;
     SlotNumber slotNum;
     public SlotNumber SlotNumber => slotNum;
-    public float runningSpeed = 2.0f;
+    public float runningSpeed = 3.0f;
     private CharacterController cc;
     private PlayerMove inputActions;
     private Vector2 movementInput;

@@ -610,7 +610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a8cb6f30e849414793860e17924d1ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 2
+  mouseSensitivity: 5
   playerBody: {fileID: 1170557410350977315}
   interactableLayerMask:
     serializedVersion: 2
