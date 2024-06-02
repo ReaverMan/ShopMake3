@@ -10,6 +10,7 @@ public class Strength : BuffBase
             player.limitWeight += amountBuff;
             player.MaxWeight += amountBuff;
 
+            Destroy(this.gameObject);
             CoroutineManager.Instance.StartManagedCoroutine(Duration());
             base.Use();
         }
@@ -28,7 +29,6 @@ public class Strength : BuffBase
         player.limitWeight -= amountBuff;
         player.MaxWeight -= amountBuff;
         Debug.Log("Strength 버프 종료"); // 버프 종료 메시지 출력
-        Destroy(gameObject);
     }
 
 #if UNITY_EDITOR

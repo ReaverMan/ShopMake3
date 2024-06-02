@@ -9,9 +9,9 @@ public class Heal : BuffBase
         if (player != null)
         {
             player.Heal(amountBuff);
-            Debug.Log("HP°¡ È¸º¹µÇ¾ú½À´Ï´Ù.");
-            base.Use();
+            Debug.Log("HPê°€ íšŒë³µë˜ì—ˆìŠµë‹ˆë‹¤.");
             Destroy(gameObject);
+            base.Use();
         }
         else
         {

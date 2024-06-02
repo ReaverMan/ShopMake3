@@ -123,14 +123,9 @@ public class GameManager : Singleton<GameManager>
     {
         if (sceneName == "InGameScene")
         {
-            SaveEquipmentData();  // 장비 데이터 저장
-            player.UnequipAllItems();
-            SaveWorldInventory();
-            SaveInventory();
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
+            SaveAllData(); // 모든 데이터를 저장
+            player.UnequipAllItems(); // 모든 아이템을 해제
         }
-        SaveAllData();
         StartCoroutine(LoadScene(sceneName, OnGameStartCompleted));
     }
 
@@ -138,19 +133,16 @@ public class GameManager : Singleton<GameManager>
     {
         if (sceneName == "MainMenuScene")
         {
-            SaveEquipmentData();  // 장비 데이터 저장
-            player.UnequipAllItems();
-            SaveInventory();
-            SaveWorldInventoryMoney();
-
-            OnGameEnding?.Invoke();
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.Confined;
+            SaveInventory(); // 인벤토리 저장
+            SavePlayerWeight(); // 플레이어 무게 저장
+            player.UnequipAllItems(); // 모든 아이템을 해제
+            SaveWorldInventory(); // 월드 인벤토리 저장
+            SaveWorldInventoryMoney(); // 월드 인벤토리 돈 저장
+            OnGameEnding?.Invoke(); // 게임 종료 이벤트 호출
         }
-        SaveAllData();
+        SaveAllData(); // 모든 데이터를 저장
         StartCoroutine(LoadScene(sceneName, OnGameEnding));
     }
-
 
     private void SaveEquipmentData()
     {
@@ -172,24 +164,23 @@ public class GameManager : Singleton<GameManager>
             yield return null;
         }
 
-        yield return new WaitForSeconds(0.1f);
-
         if (sceneName == "MainMenuScene")
         {
-            LoadWorldInventoryMoney();
-            LoadInventory();
+            LoadAllData(); // 모든 데이터를 로드
         }
         else if (sceneName == "InGameScene")
         {
-            LoadInventory();
-            LoadPlayerWeight();
-            OnGameStartCompleted?.Invoke();
+            LoadInventory(); // 인벤토리 로드
+            LoadPlayerWeight(); // 플레이어 무게 로드
+            LoadWorldInventory(); // 월드 인벤토리 로드
+            LoadWorldInventoryMoney(); // 월드 인벤토리 돈 로드
+            OnGameStartCompleted?.Invoke(); // 게임 시작 이벤트 호출
         }
 
         Player playerScript = FindObjectOfType<Player>();
         if (playerScript != null)
         {
-            playerScript.InitializeEquipments();  // Player 클래스에서 장비 초기화
+            playerScript.InitializeEquipments(); // Player 클래스에서 장비 초기화
         }
 
         onLoaded?.Invoke();
@@ -198,21 +189,16 @@ public class GameManager : Singleton<GameManager>
     public void SaveAllData()
     {
         SavePlayerWeight();
-        if (SceneManager.GetActiveScene().name == "MainMenuScene")
-        {
-            SaveWorldInventoryMoney();
-        }
+        SaveWorldInventory();
+        SaveWorldInventoryMoney();
     }
 
     public void LoadAllData()
     {
         LoadPlayerWeight();
-        if (SceneManager.GetActiveScene().name == "MainMenuScene")
-        {
-            LoadWorldInventoryMoney();
-        }
+        LoadWorldInventoryMoney();
+        LoadWorldInventory();
     }
-
 
     public void SaveWorldInventory()
     {
@@ -237,6 +223,7 @@ public class GameManager : Singleton<GameManager>
         if (inventoryUI != null)
             inventoryUI.Inventory.LoadInventoryFromJson();
     }
+
     public void SavePlayerWeight()
     {
         if (player != null)

@@ -310,6 +310,8 @@ public class Player : MonoBehaviour
         inputActions.Player.Disable();
         DropAllInventoryItems();  // 인벤토리의 모든 아이템을 버리는 함수 호출
         onDie?.Invoke();
+        Weight = 0; // 플레이어 무게를 0으로 설정
+        SavePlayerData(); // 플레이어 데이터를 저장
         GoToMainMenu();  // MainMenuScene으로 전환
     }
     private void DropAllInventoryItems()

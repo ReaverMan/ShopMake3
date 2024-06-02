@@ -4,11 +4,11 @@ using UnityEngine.InputSystem;
 
 public class QuickSlot : MonoBehaviour
 {
-    private PlayerInput playerInput;
+    [SerializeField]
     private Player owner;
     public Player Owner => owner;
 
-    PlayerMove UIinputActions;
+    private PlayerMove UIinputActions;
 
     public Action<Equipment> onWeaponChange;
     public Action<Equipment> onGranadeChange;
@@ -21,17 +21,27 @@ public class QuickSlot : MonoBehaviour
 
     private void OnEnable()
     {
+        EnableInputActions();
+    }
+
+    private void OnDisable()
+    {
+        DisableInputActions();
+    }
+
+    private void EnableInputActions()
+    {
         UIinputActions.Player.Enable();
         UIinputActions.Player.QuickSlot1.performed += MainWeapon1;
         UIinputActions.Player.QuickSlot2.performed += ThrowWeapon;
         UIinputActions.Player.QuickSlot3.performed += ETCSlot;
     }
 
-    private void OnDisable()
+    private void DisableInputActions()
     {
-        UIinputActions.Player.QuickSlot3.performed -= ETCSlot;
-        UIinputActions.Player.QuickSlot2.performed -= ThrowWeapon;
         UIinputActions.Player.QuickSlot1.performed -= MainWeapon1;
+        UIinputActions.Player.QuickSlot2.performed -= ThrowWeapon;
+        UIinputActions.Player.QuickSlot3.performed -= ETCSlot;
         UIinputActions.Player.Disable();
     }
 
@@ -48,5 +58,10 @@ public class QuickSlot : MonoBehaviour
     private void ETCSlot(InputAction.CallbackContext context)
     {
         onETCChange?.Invoke(Equipment.ETC);
+    }
+
+    public void SetOwner(Player newOwner)
+    {
+        owner = newOwner;
     }
 }

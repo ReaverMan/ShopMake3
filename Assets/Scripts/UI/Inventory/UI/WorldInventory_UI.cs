@@ -36,14 +36,14 @@ public class WorldInventory_UI : MonoBehaviour
     CanvasGroup canvas;
 
 
-    int money = 0;
+    int money;
 
     /// <summary>
     /// 월드 인벤토리 돈 관리하는 프로퍼티인데 나중에 아이템 개수로 바꿀 예정
     /// </summary>
     public int Money
     {
-        get => money;
+        get => money = 500;
         set
         {
             if (money != value)

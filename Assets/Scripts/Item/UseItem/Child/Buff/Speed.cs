@@ -8,6 +8,7 @@ public class Speed : BuffBase
         if (player != null) // BuffBase에서 상속된 player 필드를 사용
         {
             player.moveSpeed += amountBuff;
+            Destroy(this.gameObject);
             CoroutineManager.Instance.StartManagedCoroutine(Duration());
             Debug.Log("Speed가 증가하였습니다.");
             base.Use();

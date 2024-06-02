@@ -16,7 +16,7 @@ MonoBehaviour:
   itemType: 4
   itemName: 300m
   itemImage: {fileID: 21300000, guid: 9c3402b1c92cec54797c1e7151ee58ad, type: 3}
-  weight: 0.01
+  weight: 0
   maxItemCount: 5
   itemPrefab: {fileID: 1349112568854716517, guid: 008fa7b6b008c7a45a4c267241974196, type: 3}
   Price: 10
