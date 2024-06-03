@@ -188,6 +188,7 @@ public class GameManager : Singleton<GameManager>
 
     public void SaveAllData()
     {
+        SaveInventory();
         SavePlayerWeight();
         SaveWorldInventory();
         SaveWorldInventoryMoney();
@@ -195,6 +196,7 @@ public class GameManager : Singleton<GameManager>
 
     public void LoadAllData()
     {
+        LoadInventory();
         LoadPlayerWeight();
         LoadWorldInventoryMoney();
         LoadWorldInventory();
